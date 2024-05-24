@@ -1,0 +1,72 @@
+{
+  "entity.red_panda.eat": {
+    "category": "entity",
+    "subtitle": "Red Panda Eat",
+    "sounds": [
+      {
+        "name": "red_panda:entity/entity.red_panda.eat",
+        "stream": true
+      }
+    ]
+  },
+  "entity.red_panda.sleep": {
+    "category": "entity",
+    "subtitle": "Red Panda Sleep",
+    "sounds": [
+      {
+        "name": "red_panda:entity/entity.red_panda.sleep",
+        "stream": true
+      }
+    ]
+  },
+  "entity.red_panda.sniff": {
+    "category": "entity",
+    "subtitle": "Red Panda Sniff",
+    "sounds": [
+      {
+        "name": "red_panda:entity/entity.red_panda.sniff",
+        "stream": true
+      }
+    ]
+  },
+  "entity.red_panda.screech": {
+    "category": "entity",
+    "subtitle": "Red Panda Screech",
+    "sounds": [
+      {
+        "name": "red_panda:entity/entity.red_panda.screech",
+        "stream": true
+      }
+    ]
+  },
+  "entity.red_panda.ambient": {
+    "category": "entity",
+    "subtitle": "Red Panda Ambient",
+    "sounds": [
+      {
+        "name": "red_panda:entity/entity.red_panda.ambient",
+        "stream": true
+      }
+    ]
+  },
+  "entity.red_panda.hurt": {
+    "category": "entity",
+    "subtitle": "Red Panda Hurt",
+    "sounds": [
+      {
+        "name": "red_panda:entity/entity.red_panda.hurt",
+        "stream": true
+      }
+    ]
+  },
+  "entity.red_panda.death": {
+    "category": "entity",
+    "subtitle": "Red Panda Death",
+    "sounds": [
+      {
+        "name": "red_panda:entity/entity.red_panda.death",
+        "stream": true
+      }
+    ]
+  }
+}
