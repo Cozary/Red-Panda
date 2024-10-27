@@ -4,6 +4,7 @@ import com.cozary.red_panda.init.ModEntityTypes;
 import com.cozary.red_panda.init.ModSound;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -28,11 +29,13 @@ import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.ShoulderRidingEntity;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SwordItem;
@@ -44,15 +47,11 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class RedPandaEntity extends ShoulderRidingEntity {
@@ -72,9 +71,9 @@ public class RedPandaEntity extends ShoulderRidingEntity {
         super(p_28451_, p_28452_);
         this.lookControl = new RedPandaEntityLookControl();
         this.moveControl = new RedPandaEntityMoveControl();
-        this.setPathfindingMalus(BlockPathTypes.DANGER_OTHER, 0.0F);
+        this.setPathfindingMalus(PathType.DANGER_OTHER, 0.0F);
         this.setCanPickUpLoot(true);
-        this.setTame(false);
+        this.setTame(false, false);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -86,10 +85,10 @@ public class RedPandaEntity extends ShoulderRidingEntity {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_FLAGS_ID, (byte) 0);
-        this.entityData.define(EAT_BAMBOO_COUNTER, 0);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_FLAGS_ID, (byte) 0);
+        builder.define(EAT_BAMBOO_COUNTER, 0);
     }
 
     @Override
@@ -162,7 +161,7 @@ public class RedPandaEntity extends ShoulderRidingEntity {
         if (uuid != null) {
             assert redPandaEntity != null;
             redPandaEntity.setOwnerUUID(uuid);
-            redPandaEntity.setTame(true);
+            redPandaEntity.setTame(true, true);
         }
         return redPandaEntity;
     }
@@ -170,6 +169,7 @@ public class RedPandaEntity extends ShoulderRidingEntity {
     @Override
     public @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand p_30413_) {
         ItemStack itemstack = player.getItemInHand(p_30413_);
+        FoodProperties foodProperties = itemstack.get(DataComponents.FOOD);
         if (this.level().isClientSide) {
             boolean flag = this.isOwnedBy(player) || this.isTame() || FOOD_ITEMS.test(itemstack) && !this.isTame();
             return flag ? InteractionResult.CONSUME : InteractionResult.PASS;
@@ -180,8 +180,9 @@ public class RedPandaEntity extends ShoulderRidingEntity {
                         itemstack.shrink(1);
                     }
 
-                    if (itemstack.getItem() != Items.BAMBOO)
-                        this.heal(Objects.requireNonNull(itemstack.getItem().getFoodProperties()).getNutrition());
+                    if (itemstack.getItem() != Items.BAMBOO && foodProperties != null) {
+                        this.heal(foodProperties.nutrition());
+                    }
                     return InteractionResult.SUCCESS;
                 }
 
@@ -207,9 +208,9 @@ public class RedPandaEntity extends ShoulderRidingEntity {
         }
     }
 
-    @Nullable
+    @NotNull
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_28487_, @NotNull DifficultyInstance p_28488_, @NotNull MobSpawnType p_28489_, @Nullable SpawnGroupData p_28490_, @Nullable CompoundTag p_28491_) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_28487_, @NotNull DifficultyInstance p_28488_, @NotNull MobSpawnType p_28489_, @NotNull SpawnGroupData p_28490_) {
         Holder<Biome> holder = p_28487_.getBiome(this.blockPosition());
         boolean flag = false;
 
@@ -217,12 +218,7 @@ public class RedPandaEntity extends ShoulderRidingEntity {
             this.setAge(-24000);
         }
 
-        return super.finalizeSpawn(p_28487_, p_28488_, p_28489_, p_28490_, p_28491_);
-    }
-
-    @Override
-    protected float getStandingEyeHeight(@NotNull Pose p_28500_, @NotNull EntityDimensions p_28501_) {
-        return this.isBaby() ? p_28501_.height * 0.85F : 0.4F;
+        return super.finalizeSpawn(p_28487_, p_28488_, p_28489_, p_28490_);
     }
 
     @Override
@@ -383,7 +379,7 @@ public class RedPandaEntity extends ShoulderRidingEntity {
 
     }
 
-    @Nullable
+    @NotNull
     @Override
     protected SoundEvent getAmbientSound() {
         if (this.isSleeping()) {
@@ -400,13 +396,13 @@ public class RedPandaEntity extends ShoulderRidingEntity {
         }
     }
 
-    @Nullable
+    @NotNull
     @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource p_28548_) {
         return ModSound.RED_PANDA_HURT.get();
     }
 
-    @Nullable
+    @NotNull
     @Override
     protected SoundEvent getDeathSound() {
         return ModSound.RED_PANDA_DEATH.get();

@@ -18,8 +18,6 @@ public class RedPandaForge {
 
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        eventBus.addListener(this::setupCommon);
-
         RedPanda.LOG.info("Hello Forge world!");
         RedPanda.init();
 
@@ -28,11 +26,4 @@ public class RedPandaForge {
 
     }
 
-    public void setupCommon(final FMLCommonSetupEvent event) {
-
-        event.enqueueWork(() -> {
-                    SpawnPlacements.register(ModEntityTypes.RED_PANDA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedPandaEntity::checkRedPandaEntitySpawnRules);
-                }
-        );
-    }
 }

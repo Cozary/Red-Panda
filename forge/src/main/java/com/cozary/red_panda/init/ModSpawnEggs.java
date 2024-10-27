@@ -3,6 +3,7 @@ package com.cozary.red_panda.init;
 import com.cozary.red_panda.RedPanda;
 import com.google.common.collect.Sets;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 
@@ -15,8 +16,14 @@ public class ModSpawnEggs {
 
     public static LinkedHashSet<RegistryObject<Item>> SPAWNEGGS_TAB = Sets.newLinkedHashSet();
 
-    public static final Supplier<Item> RED_PANDA_EGG = registerWithTab("red_panda_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.RED_PANDA, 0xFFFFFF, 0xffa500, new Item.Properties()));
-
+    public static final Supplier<Item> RED_PANDA_EGG = registerWithTab("red_panda_spawn_egg", () ->
+            new ForgeSpawnEggItem(
+                    ModEntityTypes.RED_PANDA,
+                    FastColor.ARGB32.opaque(0xFFFFFF),
+                    FastColor.ARGB32.opaque(0xffa500),
+                    new Item.Properties()
+            )
+    );
     public static RegistryObject<Item> registerWithTab(final String name, final Supplier<? extends Item> supplier) {
         RegistryObject<Item> item = ITEMS.register(name, supplier);
         SPAWNEGGS_TAB.add(item);

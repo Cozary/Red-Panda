@@ -4,10 +4,11 @@ import com.cozary.red_panda.RedPanda;
 import com.cozary.red_panda.entity.RedPandaEntity;
 import com.cozary.red_panda.init.ModEntityTypes;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
-@Mod.EventBusSubscriber(modid = RedPanda.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RedPanda.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class EntityRegister {
 
 
