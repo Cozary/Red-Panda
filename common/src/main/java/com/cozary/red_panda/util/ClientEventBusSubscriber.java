@@ -6,6 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ClientEventBusSubscriber {
 
-    public static ModelLayerLocation RED_PANDA = new ModelLayerLocation(new ResourceLocation(RedPanda.MOD_ID, "red_panda"), "red_panda");
+    public static ModelLayerLocation RED_PANDA = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(RedPanda.MOD_ID, "red_panda"), "red_panda");
 
 }

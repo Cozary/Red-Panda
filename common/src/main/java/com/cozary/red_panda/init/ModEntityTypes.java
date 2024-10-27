@@ -18,7 +18,7 @@ public class ModEntityTypes {
 
     public static final RegistryObject<EntityType<RedPandaEntity>> RED_PANDA = registerEntitiesList("red_panda", () -> EntityType.Builder.of(RedPandaEntity::new, MobCategory.CREATURE)
             .sized(0.6F, 0.7F).clientTrackingRange(32)
-            .build(new ResourceLocation(RedPanda.MOD_ID, "red_panda").toString()));
+            .build(ResourceLocation.fromNamespaceAndPath(RedPanda.MOD_ID, "red_panda").toString()));
 
     @SuppressWarnings("unchecked")
     public static <T extends EntityType<?>> RegistryObject<T> registerEntitiesList(final String name, final Supplier<? extends T> supplier) {

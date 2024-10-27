@@ -23,7 +23,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 
 public class RedPandaFabric implements ModInitializer {
 
-    private static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(RedPanda.MOD_ID, "red_panda"));
+    private static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(RedPanda.MOD_ID, "red_panda"));
 
 
     @Override

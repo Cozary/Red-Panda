@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RedPandaRenderer extends MobRenderer<RedPandaEntity, RedPandaModel<RedPandaEntity>> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(RedPanda.MOD_ID, "textures/entity/red_panda.png");
+    protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(RedPanda.MOD_ID, "textures/entity/red_panda.png");
 
     public RedPandaRenderer(EntityRendererProvider.Context context) {
         super(context, new RedPandaModel<>(context.bakeLayer(ClientEventBusSubscriber.RED_PANDA)), 0.5F);

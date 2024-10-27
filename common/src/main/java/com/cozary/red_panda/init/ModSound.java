@@ -20,7 +20,7 @@ public class ModSound {
     public static final RegistryObject<SoundEvent> RED_PANDA_AMBIENT = createSoundEvent("entity.red_panda.ambient");
 
     private static RegistryObject<SoundEvent> createSoundEvent(final String soundName) {
-        return SOUNDS.register(soundName, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(RedPanda.MOD_ID, soundName)));
+        return SOUNDS.register(soundName, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(RedPanda.MOD_ID, soundName)));
     }
 
     public static void loadClass() {

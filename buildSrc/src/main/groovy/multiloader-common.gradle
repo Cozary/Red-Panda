@@ -19,7 +19,20 @@ repositories {
                 url = 'https://repo.spongepowered.org/repository/maven-public'
             }
         }
-        filter { includeGroupAndSubgroups("org.spongepowered") }
+        filter { includeGroupAndSubgroups('org.spongepowered') }
+    }
+    exclusiveContent {
+        forRepositories(
+                maven {
+                    name = 'ParchmentMC'
+                    url = 'https://maven.parchmentmc.org/'
+                },
+                maven {
+                    name = "NeoForge"
+                    url = 'https://maven.neoforged.net/releases'
+                }
+        )
+        filter { includeGroup('org.parchmentmc.data') }
     }
     maven {
         name = 'BlameJared'
@@ -41,13 +54,13 @@ repositories {
 }
 
 sourcesJar {
-    from(rootProject.file("LICENSE")) {
+    from(rootProject.file('LICENSE')) {
         rename { "${it}_${mod_name}" }
     }
 }
 
 jar {
-    from(rootProject.file("LICENSE")) {
+    from(rootProject.file('LICENSE')) {
         rename { "${it}_${mod_name}" }
     }
 
@@ -103,7 +116,7 @@ publishing {
     }
     repositories {
         maven {
-            url System.getenv("local_maven_url")
+            url System.getenv('local_maven_url')
         }
     }
 }

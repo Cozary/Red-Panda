@@ -29,7 +29,7 @@ public class RendererRegister {
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(skinTypeName -> {
-            if (event.getSkin(skinTypeName) instanceof PlayerRenderer renderer) {
+            if (event.getPlayerSkin(skinTypeName) instanceof PlayerRenderer renderer) {
                 renderer.addLayer(new RedPandaOnShoulderLayer<>(renderer, event.getEntityModels()));
             }
         });

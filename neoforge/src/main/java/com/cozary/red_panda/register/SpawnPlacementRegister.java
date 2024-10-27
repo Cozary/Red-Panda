@@ -7,13 +7,13 @@ import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 @EventBusSubscriber(modid = RedPanda.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class SpawnPlacementRegister {
 
     @SubscribeEvent
-    public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
-        event.register(ModEntityTypes.RED_PANDA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedPandaEntity::checkRedPandaEntitySpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+    public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
+        event.register(ModEntityTypes.RED_PANDA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedPandaEntity::checkRedPandaEntitySpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
     }
 }
