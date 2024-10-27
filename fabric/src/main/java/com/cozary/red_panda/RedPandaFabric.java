@@ -17,6 +17,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 public class RedPandaFabric implements ModInitializer {
@@ -43,7 +44,7 @@ public class RedPandaFabric implements ModInitializer {
 
     public void register() {
 
-        BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), MobCategory.MONSTER, ModEntityTypes.RED_PANDA.get(), 40, 2, 4);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.JUNGLE), MobCategory.MONSTER, ModEntityTypes.RED_PANDA.get(), 40, 2, 4);
 
         SpawnPlacements.register(ModEntityTypes.RED_PANDA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedPandaEntity::checkRedPandaEntitySpawnRules);
 
