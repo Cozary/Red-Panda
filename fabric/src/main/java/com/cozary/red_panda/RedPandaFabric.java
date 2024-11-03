@@ -46,7 +46,7 @@ public class RedPandaFabric implements ModInitializer {
 
     public void register() {
 
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.JUNGLE), MobCategory.MONSTER, ModEntityTypes.RED_PANDA.get(), 40, 2, 4);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.JUNGLE), MobCategory.CREATURE, ModEntityTypes.RED_PANDA.get(), 40, 2, 4);
 
         SpawnPlacements.register(ModEntityTypes.RED_PANDA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedPandaEntity::checkRedPandaEntitySpawnRules);
 
