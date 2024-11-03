@@ -19,7 +19,6 @@
       "com.cozary.red_panda.RedPandaFabric"
     ],
     "client": [
-      "com.cozary.red_panda.register.EntityRegister",
       "com.cozary.red_panda.register.RendererRegister"
     ]
   },
