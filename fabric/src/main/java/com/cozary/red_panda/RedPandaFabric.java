@@ -3,6 +3,7 @@ package com.cozary.red_panda;
 import com.cozary.red_panda.entity.RedPandaEntity;
 import com.cozary.red_panda.init.ModEntityTypes;
 import com.cozary.red_panda.init.ModSpawnEggs;
+import com.cozary.red_panda.register.EntityRegister;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -39,6 +40,7 @@ public class RedPandaFabric implements ModInitializer {
         RedPanda.LOG.info("Hello Fabric world!");
         RedPanda.init();
         register();
+        EntityRegister.registerAttributes();
         ModSpawnEggs.loadClass();
 
     }
