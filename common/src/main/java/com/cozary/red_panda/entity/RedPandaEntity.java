@@ -266,9 +266,6 @@ public class RedPandaEntity extends ShoulderRidingEntity {
 
     @Override
     public void tick() {
-        RedPanda.LOG.info("SIT?: {}", this.isOrderedToSit());
-        RedPanda.LOG.info("SHOULDER?: {}", this.canSitOnShoulder());
-
         super.tick();
         if (this.isEffectiveAi()) {
             boolean flag = this.isInWater();
