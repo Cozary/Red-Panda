@@ -1,5 +1,6 @@
 package com.cozary.red_panda.entity;
 
+import com.cozary.red_panda.RedPanda;
 import com.cozary.red_panda.init.ModEntityTypes;
 import com.cozary.red_panda.init.ModSound;
 import net.minecraft.core.BlockPos;
@@ -194,7 +195,6 @@ public class RedPandaEntity extends ShoulderRidingEntity {
                     this.tame(player);
                     this.navigation.stop();
                     this.setTarget(null);
-                    this.setOrderedToSit(true);
                     this.level().broadcastEntityEvent(this, (byte) 7);
                 } else {
                     this.level().broadcastEntityEvent(this, (byte) 6);
@@ -270,6 +270,9 @@ public class RedPandaEntity extends ShoulderRidingEntity {
 
     @Override
     public void tick() {
+        RedPanda.LOG.info("SIT?: {}", this.isOrderedToSit());
+        RedPanda.LOG.info("SHOULDER?: {}", this.canSitOnShoulder());
+
         super.tick();
         if (this.isEffectiveAi()) {
             boolean flag = this.isInWater();
