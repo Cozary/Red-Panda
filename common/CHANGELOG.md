@@ -1,5 +1,9 @@
 # Changelog
 
+### Added
+
+- Japanese Lang by sunbatheproductions.
+
 ### Fixed
 
-- Red Panda can be put on the shoulder again.
+- Baby model rendering twice.
