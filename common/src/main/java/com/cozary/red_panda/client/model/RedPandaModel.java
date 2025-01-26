@@ -219,15 +219,17 @@ public class RedPandaModel<T extends RedPandaEntity> extends AgeableListModel<T>
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
         super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
-        body.render(poseStack, buffer, packedLight, packedOverlay, color);
-        head.render(poseStack, buffer, packedLight, packedOverlay, color);
-        sleep.render(poseStack, buffer, packedLight, packedOverlay, color);
-        frontLeg_R.render(poseStack, buffer, packedLight, packedOverlay, color);
-        frontLeg_L.render(poseStack, buffer, packedLight, packedOverlay, color);
-        backLeg_R.render(poseStack, buffer, packedLight, packedOverlay, color);
-        backLeg_L.render(poseStack, buffer, packedLight, packedOverlay, color);
-        tail.render(poseStack, buffer, packedLight, packedOverlay, color);
-        shoulder.render(poseStack, buffer, packedLight, packedOverlay, color);
+        if(!this.young){
+            body.render(poseStack, buffer, packedLight, packedOverlay, color);
+            head.render(poseStack, buffer, packedLight, packedOverlay, color);
+            sleep.render(poseStack, buffer, packedLight, packedOverlay, color);
+            frontLeg_R.render(poseStack, buffer, packedLight, packedOverlay, color);
+            frontLeg_L.render(poseStack, buffer, packedLight, packedOverlay, color);
+            backLeg_R.render(poseStack, buffer, packedLight, packedOverlay, color);
+            backLeg_L.render(poseStack, buffer, packedLight, packedOverlay, color);
+            tail.render(poseStack, buffer, packedLight, packedOverlay, color);
+            shoulder.render(poseStack, buffer, packedLight, packedOverlay, color);
+        }
     }
 
 

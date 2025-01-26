@@ -22,9 +22,4 @@ public class RedPandaRenderer extends MobRenderer<RedPandaEntity, RedPandaModel<
         return TEXTURE;
     }
 
-    @Override
-    protected void scale(RedPandaEntity entity, @NotNull PoseStack poseStack, float p_115316_) {
-        if (entity.isBaby()) poseStack.scale(0.6F, 0.6F, 0.6F);
-        else poseStack.scale(1F, 1F, 1F);
-    }
 }
