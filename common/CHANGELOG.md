@@ -2,8 +2,4 @@
 
 ### Added
 
-- Japanese Lang by sunbatheproductions.
-
-### Fixed
-
-- Baby model rendering twice.
+- Korean language translation by sunbatheproductions
